@@ -3,8 +3,8 @@ Projeto para o componente curricular de Programação Orientada a Objetos
 
 ## Stack
 ### Back
-- Java 17+
-- Javalin (servidor HTTP REST)
+- Java 21+
+- Spring
 - SQLite
 - JUnit 5 (testes unitários)
 
