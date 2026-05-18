@@ -97,7 +97,7 @@ flowchart TD
         <img src="./assets/examples/percurso-cognitivo.png" width="100%" alt="Percurso Cognitivo ADT Studio"/>
       </a>
       <br/><br/>
-      <b>Percurso Cognitivo no ADT Studio</b>
+      <b>Percurso Cognitivo ADT Studio</b>
       <br/>
       <sub>IHC · Inspeção de usabilidade</sub>
       <br/><br/>
@@ -180,7 +180,7 @@ flowchart TD
 
 ## Stack
 
-<div align="center">
+<div>
 
 | Backend | Frontend | Integrações |
 |:--:|:--:|:--:|
@@ -197,7 +197,7 @@ flowchart TD
 
 ## Equipe
 
-<div align="center">
+<div>
 
 | | Pessoa | GitHub |
 |:--:|:--|:--|
