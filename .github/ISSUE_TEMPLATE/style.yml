@@ -1,0 +1,58 @@
+name: 🎨 Style / Design
+description: Reportar inconsistência ou sugerir ajuste de UI / design
+title: 'style: '
+labels: ['style']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        <p align="center">
+          <a href="https://github.com/Eliezir/apresenta.ai">
+            <picture>
+              <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Eliezir/apresenta.ai/main/assets/logo-dark.png">
+              <img src="https://raw.githubusercontent.com/Eliezir/apresenta.ai/main/assets/logo.png" alt="Apresenta.AI" height="100" />
+            </picture>
+          </a>
+        </p>
+
+        <p align="center"><em>Pra issues de UI, layout, cores, tipografia, espaçamento, animação.</em></p>
+
+        > [!IMPORTANT]
+        > - Use um título descritivo.
+        > - Anexe screenshots ou prints — issues de design ficam impossíveis de avaliar sem visual.
+        > - Pra bugs de comportamento (botão não funciona, dados errados), use o **Bug Report** ao invés.
+  - type: checkboxes
+    id: preliminary
+    attributes:
+      label: Checks preliminares
+      options:
+        - label: Busquei issues existentes e não encontrei duplicata.
+          required: true
+        - label: Isso é uma mudança visual/UX, não um bug de comportamento.
+          required: true
+  - type: input
+    id: location
+    attributes:
+      label: Tela / componente afetado
+      placeholder: 'Editor, Sidebar, modal de Modelos, preview de slides...'
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: O que está hoje
+      description: Descreva o estado atual e o que está incomodando.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Como deveria ficar
+      description: Descreva a mudança proposta. Cores, tamanhos, espaçamentos, comportamento.
+    validations:
+      required: true
+  - type: textarea
+    id: visual
+    attributes:
+      label: Screenshots, Figma ou referência
+      description: Arraste imagens, cole links de Figma/Dribbble, ou referências de outros apps.

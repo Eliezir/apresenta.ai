@@ -1,0 +1,71 @@
+name: ✨ Feature Request
+description: Sugerir uma nova funcionalidade ou melhoria
+title: 'feat: '
+labels: ['enhancement']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        <p align="center">
+          <a href="https://github.com/Eliezir/apresenta.ai">
+            <picture>
+              <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Eliezir/apresenta.ai/main/assets/logo-dark.png">
+              <img src="https://raw.githubusercontent.com/Eliezir/apresenta.ai/main/assets/logo.png" alt="Apresenta.AI" height="100" />
+            </picture>
+          </a>
+        </p>
+
+        <p align="center"><em>Valeu por sugerir uma melhoria no Apresenta.AI!</em></p>
+
+        > [!IMPORTANT]
+        > - Use um título descritivo.
+        > - Busque [issues existentes](../issues?q=is%3Aissue) pra evitar duplicatas.
+        > - Esse form é pra features e melhorias, não pra bugs.
+        > - Descreva o **problema** que você quer resolver, não só a solução que tem em mente.
+  - type: checkboxes
+    id: preliminary
+    attributes:
+      label: Checks preliminares
+      options:
+        - label: Busquei issues existentes e não encontrei duplicata.
+          required: true
+        - label: Isso é uma feature/melhoria, não um bug.
+          required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema / motivação
+      description: Que problema essa feature resolve? Qual é o caso de uso ou pain point?
+      placeholder: Estou tentando ... e hoje preciso ...
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Solução proposta
+      description: Como você imagina que isso deveria funcionar?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+      description: Outros caminhos que você pensou e por que descartou. (Opcional)
+  - type: textarea
+    id: extra
+    attributes:
+      label: Contexto adicional
+      description: Mockups, links, referências de outros apps, screenshots, etc.
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist da issue
+      description: Marque tudo que essa feature vai precisar tocar.
+      options:
+        - label: VO (Value Object)
+        - label: DAO (Data Access Object)
+        - label: BO (Business Object)
+        - label: Controller (REST endpoint)
+        - label: Teste unitário
+        - label: Tela / componente no frontend
+        - label: Documentação
