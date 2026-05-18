@@ -1,20 +1,41 @@
 ---
-name: 📝 Docs
-about: Alteração ou adição de documentação
-title: "Docs: "
+name: "📝 Documentation"
+about: Reportar problema ou sugerir melhoria na documentação
+title: "docs: "
 labels: documentation
 assignees: ''
 ---
 
-## 📝 Descrição
-<!-- Descreva o que precisa ser documentado ou alterado na documentação existente. -->
+<p align="center">
+  <a href="https://github.com/Eliezir/apresenta.ai">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Eliezir/apresenta.ai/main/assets/logo-dark.png">
+      <img src="https://raw.githubusercontent.com/Eliezir/apresenta.ai/main/assets/logo.png" alt="Apresenta.AI" height="100" />
+    </picture>
+  </a>
+</p>
 
-## 🎯 Motivação
-<!-- Por que essa documentação é necessária ou precisa ser atualizada? -->
+> 📝 **Documentation** — Valeu por ajudar a melhorar a documentação. Issues claras nas docs evitam confusão pro time todo.
 
-## 📋 O que deve ser feito
-- [ ] <!-- Tarefa 1 -->
-- [ ] <!-- Tarefa 2 -->
+## Checks preliminares
 
-## 📎 Referências
-<!-- Links, arquivos ou issues relacionadas (se houver). -->
+- [ ] Busquei [issues existentes](../issues?q=is%3Aissue) e não encontrei duplicata
+
+## Onde
+
+<!-- URL, caminho do arquivo ou seção. Ex:
+     - README.md, seção "Como rodar"
+     - frontend/README.md
+     - .devcontainer/README.md -->
+
+## O que está errado, confuso ou faltando?
+
+<!-- Descreva o problema na doc atual. -->
+
+## Sugestão de correção
+
+<!-- Como deveria ficar? (Opcional, mas ajuda muito) -->
+
+## Contexto adicional
+
+<!-- Screenshots, links, referências. -->
