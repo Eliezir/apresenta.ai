@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 📐 UML / Diagrama de classes
+    url: https://lucid.app/lucidchart/50e15334-21fa-4114-b2e3-c993eda302cd/view
+    about: Diagrama UML do sistema no LucidChart (Strategy pattern dos provedores de IA, entidades, etc.)
