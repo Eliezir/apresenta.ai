@@ -1,0 +1,64 @@
+name: ⚙️ Chore / Config
+description: Mudança em build, dependências, configuração, tooling ou setup
+title: 'chore: '
+labels: ['chore']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        <p align="center">
+          <a href="https://github.com/Eliezir/apresenta.ai">
+            <picture>
+              <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Eliezir/apresenta.ai/main/assets/logo-dark.png">
+              <img src="https://raw.githubusercontent.com/Eliezir/apresenta.ai/main/assets/logo.png" alt="Apresenta.AI" height="100" />
+            </picture>
+          </a>
+        </p>
+
+        <p align="center"><em>Pra tarefas que não são feature nem bug: deps, CI, scripts, configs, devcontainer.</em></p>
+
+        > [!IMPORTANT]
+        > - Se a mudança afeta o comportamento da aplicação pro usuário final, considere **Feature Request** ao invés.
+  - type: checkboxes
+    id: preliminary
+    attributes:
+      label: Checks preliminares
+      options:
+        - label: Busquei issues existentes e não encontrei duplicata.
+          required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área
+      options:
+        - Build (Vite, electron-vite, electron-builder)
+        - Dependências (upgrade, downgrade, remoção)
+        - CI / GitHub Actions
+        - Lint / Format (ESLint, Prettier)
+        - Tooling de dev (devcontainer, scripts, pnpm)
+        - Config do projeto (tsconfig, package.json, .gitignore)
+        - Outro
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrição
+      description: O que precisa ser feito ou alterado.
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivação
+      description: Por que essa mudança é necessária?
+    validations:
+      required: true
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Checklist de tarefas
+      description: Quebre em passos concretos se aplicável.
+      placeholder: |
+        - [ ] Tarefa 1
+        - [ ] Tarefa 2

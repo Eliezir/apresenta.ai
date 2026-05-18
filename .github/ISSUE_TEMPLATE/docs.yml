@@ -1,0 +1,53 @@
+name: 📝 Documentation
+description: Reportar problema ou sugerir melhoria na documentação
+title: 'docs: '
+labels: ['documentation']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        <p align="center">
+          <a href="https://github.com/Eliezir/apresenta.ai">
+            <picture>
+              <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Eliezir/apresenta.ai/main/assets/logo-dark.png">
+              <img src="https://raw.githubusercontent.com/Eliezir/apresenta.ai/main/assets/logo.png" alt="Apresenta.AI" height="100" />
+            </picture>
+          </a>
+        </p>
+
+        <p align="center"><em>Valeu por ajudar a melhorar a documentação. Issues claras nas docs evitam confusão pro time todo.</em></p>
+
+        > [!IMPORTANT]
+        > - Use um título descritivo.
+        > - Busque [issues existentes](../issues?q=is%3Aissue) pra evitar duplicatas.
+  - type: checkboxes
+    id: preliminary
+    attributes:
+      label: Checks preliminares
+      options:
+        - label: Busquei issues existentes e não encontrei duplicata.
+          required: true
+  - type: input
+    id: location
+    attributes:
+      label: Onde
+      description: URL, caminho do arquivo ou seção da documentação.
+      placeholder: 'README.md, frontend/README.md, .devcontainer/README.md, seção "Como rodar"'
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: O que está errado, confuso ou faltando?
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Sugestão de correção
+      description: Como deveria ficar? (Opcional, mas ajuda muito)
+  - type: textarea
+    id: extra
+    attributes:
+      label: Contexto adicional
+      description: Screenshots, links, referências.

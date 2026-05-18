@@ -1,0 +1,117 @@
+name: 🐞 Bug Report
+description: Reportar um bug no Apresenta.AI
+title: 'fix: '
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        <p align="center">
+          <a href="https://github.com/Eliezir/apresenta.ai">
+            <picture>
+              <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Eliezir/apresenta.ai/main/assets/logo-dark.png">
+              <img src="https://raw.githubusercontent.com/Eliezir/apresenta.ai/main/assets/logo.png" alt="Apresenta.AI" height="100" />
+            </picture>
+          </a>
+        </p>
+
+        <p align="center"><em>Obrigado por dedicar um tempo pra reportar esse bug. Quanto mais detalhe, mais rápido a gente resolve.</em></p>
+
+        > [!IMPORTANT]
+        > - Use um título descritivo. Títulos vagos atrasam o triage.
+        > - Busque [issues existentes](../issues?q=is%3Aissue) antes de abrir uma nova pra evitar duplicatas.
+        > - Descreva o problema com detalhes, passos pra reproduzir e screenshots/prints quando aplicável.
+  - type: checkboxes
+    id: preliminary
+    attributes:
+      label: Checks preliminares
+      description: Confirme antes de submeter pra acelerar o triage.
+      options:
+        - label: Li e entendi o aviso acima.
+          required: true
+        - label: Busquei issues existentes e não encontrei duplicata.
+          required: true
+        - label: Isso é um bug, não uma sugestão de feature.
+          required: true
+        - label: Consegui reproduzir o bug pelo menos uma vez.
+          required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: O que aconteceu?
+      description: Descreva o problema de forma clara e objetiva.
+      placeholder: Conte o que você está vendo.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Passos pra reproduzir
+      description: Liste os passos numerados pra reproduzir o bug.
+      placeholder: |
+        1. Abrir o projeto X
+        2. Clicar em Y
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamento esperado
+      description: O que deveria ter acontecido?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportamento atual
+      description: O que aconteceu na prática?
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Modo
+      description: Onde o bug aconteceu?
+      options:
+        - 🖥️ Desktop (Electron) — pnpm dev ou app empacotado
+        - 🌐 Web — pnpm dev:web no navegador
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Sistema operacional
+      options:
+        - macOS
+        - Windows
+        - Linux
+    validations:
+      required: true
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Navegador
+      description: Só preencha se o modo for Web.
+      options:
+        - 'N/A (modo Desktop)'
+        - Chrome / Chromium
+        - Safari
+        - Firefox
+        - Edge
+        - Outro
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Versão do app
+      description: 'Versão exibida em Sobre, ou commit SHA se em dev (`git rev-parse --short HEAD`).'
+      placeholder: '0.1.0 ou abc1234'
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Screenshots, logs ou contexto adicional
+      description: Anexe imagens (arraste e solte) ou cole logs relevantes.
