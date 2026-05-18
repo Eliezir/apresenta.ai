@@ -10,7 +10,7 @@ function createWindow(): void {
     height: 670,
     show: false,
     autoHideMenuBar: true,
-    ...(process.platform === 'linux' ? { icon } : {}),
+    ...(process.platform !== 'darwin' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
@@ -40,7 +40,14 @@ function createWindow(): void {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   // Set app user model id for windows
-  electronApp.setAppUserModelId('com.electron')
+  electronApp.setAppUserModelId('com.apresenta.ai')
+
+  // Override Electron's default dock icon during dev (macOS).
+  // Em produção o ícone vem do app bundle (.icns); essa chamada só afeta
+  // quando rodamos via `pnpm dev` e o binário é o Electron.app genérico.
+  if (process.platform === 'darwin' && app.dock) {
+    app.dock.setIcon(icon)
+  }
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.
