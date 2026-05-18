@@ -9,7 +9,7 @@ public class CorsConfig implements WebMvcConfigurer {
 
     // Libera Cors para Front (electron)
     @Override
-    public void addCorsMappings(CorsRegistry registry) {
+    public void addCorsMappings(final CorsRegistry registry) {
         registry.addMapping("/api/**")
                 .allowedOriginPatterns(
                         "null",

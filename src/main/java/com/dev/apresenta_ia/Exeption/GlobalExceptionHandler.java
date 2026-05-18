@@ -1,21 +1,21 @@
 package com.dev.apresenta_ia.Exeption;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     // Captura todas as excessões de validação
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErroResponse> tratarErroValidacao(MethodArgumentNotValidException ex){
-        List<String> mensagens = ex.getBindingResult()
+    public ResponseEntity<ErroResponse> tratarErroValidacao(final MethodArgumentNotValidException ex){
+        final List<String> mensagens = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
                 .map(erro -> erro.getField() + ": " + erro.getDefaultMessage())
@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
 
     // Trata o erro de Não Encontrado 404.
     @ExceptionHandler(ExcecaoNaoEncontrado.class)
-    public ResponseEntity<ErroResponse> tratarErroNaoEncontrado(ExcecaoNaoEncontrado ex){
+    public ResponseEntity<ErroResponse> tratarErroNaoEncontrado(final ExcecaoNaoEncontrado ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                 new ErroResponse(
                         LocalDateTime.now(),
@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
 
     // Tratar validações de negócio lançadas manualmente nos Services
     @ExceptionHandler(ExcecaoValidacao.class)
-    public ResponseEntity<ErroResponse> tratarExcecaoValidacao(ExcecaoValidacao ex) {
+    public ResponseEntity<ErroResponse> tratarExcecaoValidacao(final ExcecaoValidacao ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                 new ErroResponse(
                         LocalDateTime.now(),
@@ -55,7 +55,7 @@ public class GlobalExceptionHandler {
 
     // Captura qualquer ExcecaoApp que não foi tratada acima
     @ExceptionHandler(ExcecaoApp.class)
-    public ResponseEntity<ErroResponse> tratarExcecaoApp(ExcecaoApp ex) {
+    public ResponseEntity<ErroResponse> tratarExcecaoApp(final ExcecaoApp ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
                 new ErroResponse(
                         LocalDateTime.now(),

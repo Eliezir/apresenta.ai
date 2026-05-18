@@ -1,6 +1,5 @@
 package com.dev.apresenta_ia.BO;
 
-import com.dev.apresenta_ia.DAO.ExemploDAO;
 import org.springframework.stereotype.Service;
 
 @Service

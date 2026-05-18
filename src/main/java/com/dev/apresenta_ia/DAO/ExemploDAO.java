@@ -1,7 +1,5 @@
 package com.dev.apresenta_ia.DAO;
 
-import com.dev.apresenta_ia.Models.Entity.ExemploEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository

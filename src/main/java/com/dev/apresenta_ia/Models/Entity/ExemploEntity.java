@@ -1,6 +1,5 @@
 package com.dev.apresenta_ia.Models.Entity;
 
-import jakarta.persistence.*;
 import lombok.Data;
 
 // Entidade mapeada para o banco de dados
