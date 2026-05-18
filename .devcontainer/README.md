@@ -12,6 +12,7 @@ Esse dev container existe pra **zerar o atrito de setup** entre as 6 pessoas do 
   - Format on save com Prettier
   - ESLint auto-fix on save
 - `pnpm install` rodado automaticamente no primeiro start (`postCreateCommand`)
+- `node_modules` (raiz e `frontend/`) e `.pnpm-store` montados em **named volumes do Docker**, isolados do host — assim binários nativos (rolldown, esbuild, electron) e o store do pnpm sempre batem com a arquitetura do container, mesmo se você já tiver rodado `pnpm install` no Mac/Windows.
 
 ## Como abrir
 
@@ -24,6 +25,14 @@ Esse dev container existe pra **zerar o atrito de setup** entre as 6 pessoas do 
 **GitHub Codespaces:**
 
 Clique em **Code → Codespaces → Create codespace on \<branch\>**.
+
+### Já tinha o container rodando antes desse setup de volumes?
+
+Se você abriu o repo no container antes da gente isolar `node_modules` em volumes, o container ainda está usando os `node_modules` do host (e provavelmente quebrando com erro de binding nativo). Rebuild para pegar a config nova:
+
+`Cmd/Ctrl + Shift + P` → **"Dev Containers: Rebuild Container"**.
+
+O `postCreateCommand` vai rodar `pnpm install` num `node_modules` limpo dentro do volume.
 
 ## O que funciona dentro do container
 

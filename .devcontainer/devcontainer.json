@@ -4,6 +4,11 @@
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
+  "mounts": [
+    "source=apresenta-ai-node-modules,target=${containerWorkspaceFolder}/node_modules,type=volume",
+    "source=apresenta-ai-frontend-node-modules,target=${containerWorkspaceFolder}/frontend/node_modules,type=volume",
+    "source=apresenta-ai-pnpm-store,target=${containerWorkspaceFolder}/.pnpm-store,type=volume"
+  ],
   "customizations": {
     "vscode": {
       "extensions": [
@@ -22,6 +27,6 @@
       }
     }
   },
-  "postCreateCommand": "corepack enable && cd frontend && pnpm install",
+  "postCreateCommand": "sudo chown node:node node_modules frontend/node_modules .pnpm-store && sudo corepack enable && pnpm install",
   "forwardPorts": [5173]
 }
