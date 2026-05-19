@@ -1,4 +1,4 @@
-package com.dev.apresenta_ia.Exeption;
+package com.dev.apresenta_ia.Exception;
 
 import java.time.LocalDateTime;
 import java.util.List;
