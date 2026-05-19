@@ -207,7 +207,6 @@
 				<version>4.9.8.3</version>
 			</plugin>
 
-			<!-- Jacoco para cobertura de testes -->
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -219,30 +218,42 @@
 							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
+
+					<!-- Jacoco para cobertura de testes -->
 					<execution>
 						<id>generate-report</id>
 						<phase>test</phase>
 						<goals>
 							<goal>report</goal>
 						</goals>
-						<!-- Patchs para excluir da verificação de cobertura dos testes -->
 						<configuration>
 							<excludes>
-								<exclude>com/dev/apresentaia/model/**</exclude>
-								<exclude>com/dev/apresentaia/dto/**</exclude>
-
-								<exclude>com/dev/apresentaia/*Application.class</exclude>
-
-								<exclude>**/*Exception.class</exclude>
+								<exclude>**/Models/VO/**</exclude>
+								<exclude>**/models/vo/**</exclude>
+								<exclude>**/Exception/**</exclude>
+								<exclude>**/exception/**</exclude>
+								<exclude>**/dao/**</exclude>
+								<exclude>**/DAO/**</exclude>
+								<exclude>**/*Application.class</exclude>
 							</excludes>
 						</configuration>
 					</execution>
+
 					<execution>
 						<id>default-check</id>
 						<goals>
 							<goal>check</goal>
 						</goals>
 						<configuration>
+							<excludes>
+								<exclude>**/Models/VO/**</exclude>
+								<exclude>**/models/vo/**</exclude>
+								<exclude>**/Exception/**</exclude>
+								<exclude>**/exception/**</exclude>
+								<exclude>**/dao/**</exclude>
+								<exclude>**/DAO/**</exclude>
+								<exclude>**/*Application.class</exclude>
+							</excludes>
 							<rules>
 								<rule>
 									<element>BUNDLE</element>
