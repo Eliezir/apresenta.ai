@@ -8,3 +8,11 @@ out/
 .env.local
 .env.*.local
 .eslintcache
+
+### IntelliJ IDEA ###
+.idea
+.idea/
+**/ .idea/
+*.iws
+*.iml
+*.ipr
