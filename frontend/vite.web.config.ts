@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import { tanstackRouter } from '@tanstack/router-plugin/vite'
 import { resolve } from 'path'
 import { findFreePort } from './scripts/findFreePort'
 
@@ -17,7 +18,7 @@ export default defineConfig(async () => {
         '@renderer': resolve(__dirname, 'src/renderer/src')
       }
     },
-    plugins: [react(), tailwindcss()],
+    plugins: [tanstackRouter({ target: 'react', autoCodeSplitting: true }), react(), tailwindcss()],
     server: {
       host: '0.0.0.0',
       port,
