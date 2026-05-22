@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { cn } from '@renderer/lib/utils'
+import { cn } from '@renderer/shared/utils'
 
 function Input({ className, type, ...props }: React.ComponentProps<'input'>): React.JSX.Element {
   return (

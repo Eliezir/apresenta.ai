@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react'
 import { MoonStar, Sun } from 'lucide-react'
-import logoLight from '@renderer/assets/logo-light.png'
-import logoDark from '@renderer/assets/logo-dark.png'
-import { Button } from '@renderer/components/ui/button'
+import { createFileRoute } from '@tanstack/react-router'
+import logoLight from '@renderer/shared/assets/logo-light.png'
+import logoDark from '@renderer/shared/assets/logo-dark.png'
+import { Button } from '@renderer/shared/ui/button'
 
-function App(): React.JSX.Element {
+export const Route = createFileRoute('/')({
+  component: IndexPage
+})
+
+function IndexPage(): React.JSX.Element {
   const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
@@ -37,5 +42,3 @@ function App(): React.JSX.Element {
     </div>
   )
 }
-
-export default App
