@@ -8,13 +8,23 @@ import { findFreePort } from './scripts/findFreePort'
 export default defineConfig(async () => {
   const port = await findFreePort(5173)
 
+  const sharedAlias = {
+    '@shared': resolve('src/shared'),
+    '@main': resolve('src/main')
+  }
+
   return {
-    main: {},
-    preload: {},
+    main: {
+      resolve: { alias: sharedAlias }
+    },
+    preload: {
+      resolve: { alias: sharedAlias }
+    },
     renderer: {
       resolve: {
         alias: {
-          '@renderer': resolve('src/renderer/src')
+          '@renderer': resolve('src/renderer/src'),
+          '@shared': resolve('src/shared')
         }
       },
       plugins: [
