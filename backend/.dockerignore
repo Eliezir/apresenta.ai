@@ -1,0 +1,8 @@
+target/
+database/*.db
+.env
+.idea/
+.vscode/
+*.iml
+HELP.md
+README.md

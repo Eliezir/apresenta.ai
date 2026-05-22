@@ -97,6 +97,38 @@ xdg-open target/site/jacoco/index.html      # Linux
 
 ---
 
+## 🐳 Rodando com Docker
+
+Alternativa ao setup nativo: subir o backend em um container, sem precisar instalar JDK 25 ou Maven na máquina. A SQLite vive em um volume nomeado (`backend-db`), então o banco persiste entre `up`/`down`.
+
+### Pré-requisitos
+* Docker Desktop (ou Docker Engine + Compose v2)
+
+### Comandos (a partir da raiz do repositório)
+
+```bash
+# Subir em background (constrói a imagem na primeira vez)
+docker compose up -d --build
+
+# Acompanhar os logs
+docker compose logs -f backend
+
+# Derrubar o container, mantendo o banco
+docker compose down
+
+# Derrubar e apagar o volume do SQLite
+docker compose down -v
+```
+
+A API fica em `http://localhost:8080`. O frontend continua rodando no host (`pnpm dev` ou `pnpm dev:web`) e aponta para essa porta normalmente — Electron precisa do host para renderizar a janela nativa.
+
+### Observações
+* O perfil padrão dentro do container é `prod`. Para usar `dev`, exporte `PROFILE_ACTIVE=dev` antes do `docker compose up`.
+* O `backend/.env` é opcional; se existir, é carregado automaticamente pelo Compose.
+* A primeira build é lenta (download das imagens base + dependências Maven). Builds subsequentes reaproveitam o cache de dependências enquanto o `pom.xml` não mudar.
+
+---
+
 ## 📂 Estrutura de Pacotes
 
 A arquitetura segue o isolamento de domínios organizados de forma limpa:
