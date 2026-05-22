@@ -4,3 +4,6 @@ out
 .DS_Store
 .eslintcache
 *.log*
+
+# TanStack Router generated route tree
+src/renderer/src/routeTree.gen.ts
