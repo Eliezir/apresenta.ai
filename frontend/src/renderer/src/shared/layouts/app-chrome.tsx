@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Command, Minus, MoonStar, MoreHorizontal, Square, Sun, X } from 'lucide-react'
-import logoLight from '@renderer/shared/assets/logo-light.png'
-import logoDark from '@renderer/shared/assets/logo-dark.png'
 import { Button } from '@renderer/shared/ui/button'
 import { cn } from '@renderer/shared/utils'
 import { IPC } from '@shared/ipc/channels'
@@ -72,27 +70,13 @@ export function AppChrome(): React.JSX.Element {
   return (
     <header
       className={cn(
-        'flex h-10 shrink-0 items-center gap-2 border-b border-border bg-canvas px-3 select-none',
+        'flex h-10 shrink-0 items-center gap-2 bg-background px-3 select-none',
         isMac && 'pl-[78px]'
       )}
       style={dragRegion}
     >
-      <div className="flex min-w-0 flex-1 items-center gap-2">
-        <img
-          src={isDark ? logoDark : logoLight}
-          alt=""
-          className="size-5 shrink-0 drop-shadow-xs"
-        />
-        <span className="truncate font-display text-sm font-medium tracking-tight">
-          Apresenta
-          <span
-            className="bg-clip-text text-transparent"
-            style={{ backgroundImage: 'var(--gradient-ai)' }}
-          >
-            .AI
-          </span>
-        </span>
-      </div>
+      <div className="flex min-w-0 flex-1" />
+
 
       <div className="flex items-center gap-0.5" style={noDragRegion}>
         <Button variant="ghost" size="icon-sm" aria-label="Paleta de comandos">

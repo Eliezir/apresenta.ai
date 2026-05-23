@@ -385,6 +385,12 @@
     pointer-events: none;
   }
 
+  /* AI gradient as a background-image utility (Tailwind can't bind gradients
+     through @theme inline like solid colors, so we expose it here). */
+  .bg-gradient-ai {
+    background-image: var(--gradient-ai);
+  }
+
   /* Twinkle for the splash starfield — opacity + gentle scale */
   @keyframes twinkle {
     0%,

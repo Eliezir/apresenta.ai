@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { ArrowRight, MoonStar, Sun } from 'lucide-react'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import logoLight from '@renderer/shared/assets/logo-light.png'
 import logoDark from '@renderer/shared/assets/logo-dark.png'
 import { Button } from '@renderer/shared/ui/button'
@@ -36,6 +36,7 @@ const statusByPhase: Record<Phase, string> = {
 function SplashPage(): React.JSX.Element {
   const [phase, setPhase] = useState<Phase>('iniciando')
   const [isDark, setIsDark] = useState<boolean>(readSavedTheme)
+  const navigate = useNavigate()
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDark)
@@ -47,11 +48,17 @@ function SplashPage(): React.JSX.Element {
   }, [isDark])
 
   const advancePhase = (): void => {
+    if (phase === 'ready') {
+      void navigate({ to: '/home' })
+      return
+    }
     setPhase((current) => {
       const idx = phaseOrder.indexOf(current)
       return phaseOrder[(idx + 1) % phaseOrder.length]
     })
   }
+
+  const isReady = phase === 'ready'
 
   return (
     <div className="relative isolate flex h-screen items-center justify-center overflow-hidden bg-canvas text-foreground">
@@ -62,10 +69,10 @@ function SplashPage(): React.JSX.Element {
         <img
           src={isDark ? logoDark : logoLight}
           alt="Apresenta.AI"
-          className="size-24 animate-in fade-in zoom-in-95 [animation-duration:500ms] [animation-fill-mode:backwards] [animation-timing-function:var(--ease-out)] drop-shadow-sm"
+          className="size-24 animate-in fade-in zoom-in-95 animation-duration-[500ms] fill-mode-[backwards] [animation-timing-function:var(--ease-out)] drop-shadow-sm"
         />
 
-        <h1 className="animate-in fade-in slide-in-from-bottom-2 [animation-duration:400ms] [animation-delay:120ms] [animation-fill-mode:backwards] font-display text-4xl font-bold tracking-tight">
+        <h1 className="animate-in fade-in slide-in-from-bottom-2 animation-duration-[400ms] [animation-delay:120ms] fill-mode-[backwards] font-display text-4xl font-bold tracking-tight">
           Apresenta
           <span
             className="bg-clip-text text-transparent"
@@ -77,14 +84,18 @@ function SplashPage(): React.JSX.Element {
 
         <p
           key={phase}
-          className="animate-in fade-in [animation-duration:300ms] text-sm text-muted-foreground"
+          className="animate-in fade-in animation-duration-[300ms] text-sm text-muted-foreground"
         >
           {statusByPhase[phase]}
         </p>
 
-        <div className="mt-2 flex flex-wrap items-center justify-center gap-2 animate-in fade-in [animation-duration:300ms] [animation-delay:700ms] [animation-fill-mode:backwards]">
-          <Button variant="secondary" size="sm" onClick={advancePhase}>
-            Avançar fase
+        <div className="mt-2 flex flex-wrap items-center justify-center gap-2 animate-in fade-in animation-duration-[300ms] [animation-delay:700ms] fill-mode-[backwards]">
+          <Button
+            variant={isReady ? 'default' : 'secondary'}
+            size="sm"
+            onClick={advancePhase}
+          >
+            {isReady ? 'Entrar no app' : 'Avançar fase'}
             <ArrowRight />
           </Button>
           <Button
