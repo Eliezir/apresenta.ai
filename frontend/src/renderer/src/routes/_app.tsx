@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 import { Sidebar } from '@renderer/shared/layouts/sidebar'
 
+const dragRegion = { WebkitAppRegion: 'drag' } as React.CSSProperties
+const noDragRegion = { WebkitAppRegion: 'no-drag' } as React.CSSProperties
+
 export const Route = createFileRoute('/_app')({
   component: AppLayout
 })
@@ -50,8 +53,11 @@ function AppLayout(): React.JSX.Element {
     <div className="flex h-screen bg-canvas">
       <Sidebar />
 
-      <main className="flex flex-1 overflow-hidden py-3 pr-3 pl-3">
-        <div className="flex flex-1 overflow-hidden rounded-[14px] border border-border/40 bg-background">
+      <main className="flex flex-1 overflow-hidden py-3 pr-3 pl-3" style={dragRegion}>
+        <div
+          className="flex flex-1 overflow-hidden rounded-[14px] border border-border/40 bg-background"
+          style={noDragRegion}
+        >
           <Outlet />
         </div>
       </main>
