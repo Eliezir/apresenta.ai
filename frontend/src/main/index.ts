@@ -6,14 +6,6 @@ import icon from '../../resources/icon.png?asset'
 
 let splashWindow: BrowserWindow | null = null
 let mainWindow: BrowserWindow | null = null
-let splashClosed = false
-let mainReady = false
-
-function maybeShowMainWindow(): void {
-  if (splashClosed && mainReady && mainWindow && !mainWindow.isDestroyed()) {
-    mainWindow.show()
-  }
-}
 
 function createSplashWindow(): void {
   splashWindow = new BrowserWindow({
@@ -37,13 +29,8 @@ function createSplashWindow(): void {
     splashWindow?.show()
   })
 
-  /* During testing the splash stays up until the user clicks Continuar
-     (which calls window.close()). Real boot logic will eventually drive
-     this automatically. */
   splashWindow.on('closed', () => {
     splashWindow = null
-    splashClosed = true
-    maybeShowMainWindow()
   })
 
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
@@ -75,8 +62,10 @@ function createWindow(): void {
   })
 
   mainWindow.on('ready-to-show', () => {
-    mainReady = true
-    maybeShowMainWindow()
+    if (splashWindow && !splashWindow.isDestroyed()) {
+      splashWindow.close()
+    }
+    mainWindow?.show()
   })
 
   mainWindow.on('closed', () => {

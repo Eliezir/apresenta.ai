@@ -6,7 +6,7 @@ import logoDark from '@renderer/shared/assets/logo-dark.png'
 import { Button } from '@renderer/shared/ui/button'
 
 export const Route = createFileRoute('/')({
-  component: SplashPage
+  component: OnboardingPage
 })
 
 const THEME_STORAGE_KEY = 'apresenta:theme'
@@ -23,18 +23,7 @@ function readSavedTheme(): boolean {
   return window.matchMedia('(prefers-color-scheme: dark)').matches
 }
 
-type Phase = 'iniciando' | 'conectando' | 'ready'
-
-const phaseOrder: Phase[] = ['iniciando', 'conectando', 'ready']
-
-const statusByPhase: Record<Phase, string> = {
-  iniciando: 'Iniciando…',
-  conectando: 'Conectando ao backend…',
-  ready: 'Tudo pronto.'
-}
-
-function SplashPage(): React.JSX.Element {
-  const [phase, setPhase] = useState<Phase>('iniciando')
+function OnboardingPage(): React.JSX.Element {
   const [isDark, setIsDark] = useState<boolean>(readSavedTheme)
   const navigate = useNavigate()
 
@@ -43,22 +32,9 @@ function SplashPage(): React.JSX.Element {
     try {
       window.localStorage.setItem(THEME_STORAGE_KEY, isDark ? 'dark' : 'light')
     } catch {
-      /* ignore — splash will fall back to OS preference */
+      /* ignore — onboarding will fall back to OS preference */
     }
   }, [isDark])
-
-  const advancePhase = (): void => {
-    if (phase === 'ready') {
-      void navigate({ to: '/home' })
-      return
-    }
-    setPhase((current) => {
-      const idx = phaseOrder.indexOf(current)
-      return phaseOrder[(idx + 1) % phaseOrder.length]
-    })
-  }
-
-  const isReady = phase === 'ready'
 
   return (
     <div className="relative isolate flex h-screen items-center justify-center overflow-hidden bg-canvas text-foreground">
@@ -82,20 +58,13 @@ function SplashPage(): React.JSX.Element {
           </span>
         </h1>
 
-        <p
-          key={phase}
-          className="animate-in fade-in animation-duration-[300ms] text-sm text-muted-foreground"
-        >
-          {statusByPhase[phase]}
+        <p className="animate-in fade-in animation-duration-[300ms] text-sm text-muted-foreground">
+          Tudo pronto.
         </p>
 
         <div className="mt-2 flex flex-wrap items-center justify-center gap-2 animate-in fade-in animation-duration-[300ms] [animation-delay:700ms] fill-mode-[backwards]">
-          <Button
-            variant={isReady ? 'default' : 'secondary'}
-            size="sm"
-            onClick={advancePhase}
-          >
-            {isReady ? 'Entrar no app' : 'Avançar fase'}
+          <Button size="sm" onClick={() => void navigate({ to: '/home' })}>
+            Entrar no app
             <ArrowRight />
           </Button>
           <Button
