@@ -1,15 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import {
-  FileText,
-  Home,
-  LayoutGrid,
-  Minus,
-  Palette,
-  Search,
-  Settings,
-  Square,
-  X
-} from 'lucide-react'
+import { useRef, useState } from 'react'
+import { FileText, Home, LayoutGrid, Palette, Search, Settings } from 'lucide-react'
 import { Link, useNavigate, useRouterState } from '@tanstack/react-router'
 import { Button } from '@renderer/shared/ui/button'
 import {
@@ -20,7 +10,11 @@ import {
 } from '@renderer/shared/ui/popover'
 import { SlidingHighlight } from '@renderer/shared/ui/sliding-highlight'
 import { cn } from '@renderer/shared/utils'
-import { IPC } from '@shared/ipc/channels'
+
+function getPlatform(): NodeJS.Platform | 'web' {
+  if (typeof window === 'undefined' || !window.electron) return 'web'
+  return window.electron.process.platform as NodeJS.Platform
+}
 
 type NavTo = '/home' | '/projects' | '/templates' | '/models' | '/settings'
 
@@ -40,11 +34,6 @@ const primaryNav: NavItem[] = [
 
 const dragRegion = { WebkitAppRegion: 'drag' } as React.CSSProperties
 const noDragRegion = { WebkitAppRegion: 'no-drag' } as React.CSSProperties
-
-function getPlatform(): NodeJS.Platform | 'web' {
-  if (typeof window === 'undefined' || !window.electron) return 'web'
-  return window.electron.process.platform as NodeJS.Platform
-}
 
 function SearchPopover(): React.JSX.Element {
   const [open, setOpen] = useState(false)
@@ -126,77 +115,33 @@ function NavRow({ item, active }: { item: NavItem; active: boolean }): React.JSX
 
 export function Sidebar(): React.JSX.Element {
   const pathname = useRouterState({ select: (s) => s.location.pathname })
-  const platform = getPlatform()
-  const showWindowControls = platform !== 'darwin' && platform !== 'web'
-
-  const [isMaximized, setIsMaximized] = useState(false)
   const primaryNavRef = useRef<HTMLElement>(null)
+  const isMac = getPlatform() === 'darwin'
   const settingsActive = pathname === '/settings'
-
-  useEffect(() => {
-    if (!showWindowControls) return
-    let cancelled = false
-    window.api.invoke(IPC.WINDOW.IS_MAXIMIZED).then((r) => {
-      if (!cancelled) setIsMaximized(r.isMaximized)
-    })
-    return () => {
-      cancelled = true
-    }
-  }, [showWindowControls])
 
   return (
     <aside
       className="flex h-full w-64 shrink-0 flex-col overflow-hidden text-foreground"
       style={dragRegion}
     >
-      <div className="flex h-12 shrink-0 items-center justify-end gap-0.5 pr-2">
-        <Button
-          asChild
-          variant="ghost"
-          size="icon-sm"
-          aria-label="Configurações"
-          className={cn(settingsActive && 'bg-foreground/8 text-foreground')}
-          style={noDragRegion}
-        >
-          <Link to="/settings">
-            <Settings />
-          </Link>
-        </Button>
-        {showWindowControls && (
-          <div className="flex items-center gap-0.5" style={noDragRegion}>
-            <Button
-              variant="ghost"
-              size="icon-xs"
-              aria-label="Minimizar"
-              onClick={() => void window.api.invoke(IPC.WINDOW.MINIMIZE)}
-            >
-              <Minus />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon-xs"
-              aria-label={isMaximized ? 'Restaurar' : 'Maximizar'}
-              onClick={async () => {
-                const r = await window.api.invoke(IPC.WINDOW.MAXIMIZE_TOGGLE)
-                setIsMaximized(r.isMaximized)
-              }}
-            >
-              <Square />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon-xs"
-              aria-label="Fechar"
-              className="hover:bg-destructive hover:text-destructive-foreground"
-              onClick={() => void window.api.invoke(IPC.WINDOW.CLOSE)}
-            >
-              <X />
-            </Button>
-          </div>
-        )}
-      </div>
+      {isMac && (
+        <div className="flex h-12 shrink-0 items-center justify-end gap-0.5 pr-2">
+          <Button
+            asChild
+            variant="ghost"
+            size="icon-sm"
+            aria-label="Configurações"
+            className={cn(settingsActive && 'bg-foreground/8 text-foreground')}
+            style={noDragRegion}
+          >
+            <Link to="/settings">
+              <Settings />
+            </Link>
+          </Button>
+        </div>
+      )}
 
-      <div className="px-3 pb-3 pt-1" style={noDragRegion}>
+      <div className={cn('px-3 pb-3', isMac ? 'pt-1' : 'pt-3')} style={noDragRegion}>
         <SearchPopover />
       </div>
 

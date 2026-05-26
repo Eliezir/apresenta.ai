@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { createFileRoute, Outlet } from '@tanstack/react-router'
 import { Sidebar } from '@renderer/shared/layouts/sidebar'
+import { WindowControls } from '@renderer/shared/layouts/window-controls'
 
 const dragRegion = { WebkitAppRegion: 'drag' } as React.CSSProperties
 const noDragRegion = { WebkitAppRegion: 'no-drag' } as React.CSSProperties
@@ -50,7 +51,7 @@ function AppLayout(): React.JSX.Element {
   }, [])
 
   return (
-    <div className="flex h-screen bg-canvas">
+    <div className="relative flex h-screen bg-canvas">
       <Sidebar />
 
       <main className="flex flex-1 overflow-hidden py-3 pr-3 pl-3" style={dragRegion}>
@@ -61,6 +62,8 @@ function AppLayout(): React.JSX.Element {
           <Outlet />
         </div>
       </main>
+
+      <WindowControls />
     </div>
   )
 }
