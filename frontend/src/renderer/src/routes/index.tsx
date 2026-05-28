@@ -1,40 +1,18 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { ArrowRight, MoonStar, Sun } from 'lucide-react'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import logoLight from '@renderer/shared/assets/logo-light.png'
 import logoDark from '@renderer/shared/assets/logo-dark.png'
 import { Button } from '@renderer/shared/ui/button'
+import { useTheme } from '@renderer/shared/hooks/use-theme'
 
 export const Route = createFileRoute('/')({
   component: OnboardingPage
 })
 
-const THEME_STORAGE_KEY = 'apresenta:theme'
-
-function readSavedTheme(): boolean {
-  if (typeof window === 'undefined') return false
-  try {
-    const saved = window.localStorage.getItem(THEME_STORAGE_KEY)
-    if (saved === 'dark') return true
-    if (saved === 'light') return false
-  } catch {
-    /* localStorage unavailable; fall through */
-  }
-  return window.matchMedia('(prefers-color-scheme: dark)').matches
-}
-
 function OnboardingPage(): React.JSX.Element {
-  const [isDark, setIsDark] = useState<boolean>(readSavedTheme)
+  const { isDark, setIsDark } = useTheme()
   const navigate = useNavigate()
-
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', isDark)
-    try {
-      window.localStorage.setItem(THEME_STORAGE_KEY, isDark ? 'dark' : 'light')
-    } catch {
-      /* ignore — onboarding will fall back to OS preference */
-    }
-  }, [isDark])
 
   return (
     <div className="relative isolate flex h-screen items-center justify-center overflow-hidden bg-canvas text-foreground">
