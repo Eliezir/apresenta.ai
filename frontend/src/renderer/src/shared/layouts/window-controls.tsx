@@ -26,8 +26,13 @@ export function WindowControls(): React.JSX.Element | null {
     window.api.invoke(IPC.WINDOW.IS_MAXIMIZED).then((r) => {
       if (!cancelled) setIsMaximized(r.isMaximized)
     })
+    // Stay in sync when the OS changes the maximize state (snap, double-click…).
+    const unsubscribe = window.api.on(IPC.WINDOW.MAXIMIZE_CHANGED, (p) => {
+      setIsMaximized(p.isMaximized)
+    })
     return () => {
       cancelled = true
+      unsubscribe()
     }
   }, [showWindowControls])
 

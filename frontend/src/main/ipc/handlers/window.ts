@@ -1,12 +1,6 @@
-import { BrowserWindow } from 'electron'
 import { IPC } from '@shared/ipc/channels'
 import { registerHandler } from '../register'
-
-function getMainWindow(): BrowserWindow | null {
-  return BrowserWindow.getAllWindows().find((w) => !w.isDestroyed() && w.isVisible()) ??
-    BrowserWindow.getAllWindows()[0] ??
-    null
-}
+import { getMainWindow } from '../../windows'
 
 export function registerWindowHandlers(): void {
   registerHandler(IPC.WINDOW.MINIMIZE, () => {
