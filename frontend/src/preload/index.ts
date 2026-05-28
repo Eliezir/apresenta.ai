@@ -1,6 +1,13 @@
-import { contextBridge, ipcRenderer } from 'electron'
+import { contextBridge, ipcRenderer, type IpcRendererEvent } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
-import type { IpcBridge, IpcChannel, IpcInput, IpcOutput } from '@shared/ipc/contract'
+import type {
+  IpcBridge,
+  IpcChannel,
+  IpcEventChannel,
+  IpcEventPayload,
+  IpcInput,
+  IpcOutput
+} from '@shared/ipc/contract'
 
 const api: IpcBridge = {
   invoke<C extends IpcChannel>(
@@ -8,6 +15,12 @@ const api: IpcBridge = {
     ...args: IpcInput<C> extends undefined ? [] : [input: IpcInput<C>]
   ): Promise<IpcOutput<C>> {
     return ipcRenderer.invoke(channel, args[0]) as Promise<IpcOutput<C>>
+  },
+  on<C extends IpcEventChannel>(channel: C, listener: (payload: IpcEventPayload<C>) => void) {
+    const handler = (_event: IpcRendererEvent, payload: IpcEventPayload<C>): void =>
+      listener(payload)
+    ipcRenderer.on(channel, handler)
+    return () => ipcRenderer.removeListener(channel, handler)
   }
 }
 
