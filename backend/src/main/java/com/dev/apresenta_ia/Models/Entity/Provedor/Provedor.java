@@ -24,6 +24,7 @@ public class Provedor {
     @Column(nullable = false)
     private String apiKey;
 
+    @Builder.Default
     @Column(nullable = false)
     private Boolean ativo = true;
 

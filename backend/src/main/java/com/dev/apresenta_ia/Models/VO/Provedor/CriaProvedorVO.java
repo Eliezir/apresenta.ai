@@ -11,7 +11,7 @@ public record CriaProvedorVO(
         @NotNull(message = "O tipo é obrigatório")
         TipoProvedor tipo,
 
-        @NotNull(message = "A API_KEY é obrigatório")
+        @NotBlank(message = "A API_KEY é obrigatório")
         String apiKey
 ) {
 }
